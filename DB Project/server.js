@@ -18,6 +18,13 @@ const authconnection = mysql.createConnection({
 	database : 'login'
 });
 
+const connection=mysql.createConnection({
+	host     : 'localhost',
+	user     : 'root',
+	password : '',
+	database : 'library'
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
@@ -35,16 +42,43 @@ app.get('/home', function(req, res) {
   res.render('pages/index');
 });
 
-// about page
-app.get('/about', function(req, res) {
-  res.render('pages/about');
-});
-
 // login page
 app.get('/', function(req, res) {
   res.render('pages/login');
 });
 
+// login page
+app.get('/relogin', function(req, res) {
+	res.render('pages/relogin');
+});
+
+//readers table page
+app.get('/readers', function(req, res) {
+	/* GET all safe foods */
+	connection.query('SELECT * from readers', function (error, rows, fields) {
+		if (error) {
+			throw error;
+		} else {
+			res.render('pages/readers', {
+				title: 'Readers Data Table',
+				data: rows
+			})
+		}
+	});
+  });
+
+
+
+//delete reader
+app.post('/deleteReader', function(request,response){
+	let index=request.body.id;
+	console.log(index);
+	connection.query('Delete from readers WHERE Id= ?', [index], function (error, rows, fields) {
+		res.redirect('/readers');
+
+	});
+});
+//login system
 app.post('/auth', function(request, response) {
 	// Capture the input fields
 	let username = request.body.user;
@@ -63,7 +97,7 @@ app.post('/auth', function(request, response) {
 				// Redirect to home page
 				response.redirect('/home');
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				response.redirect('/relogin');
 			}			
 			response.end();
 		});

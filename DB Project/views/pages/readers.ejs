@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<header>
+    <%- include('../partials/header'); %>
+  </header>
+<body class="container">
+  <main>
+    <div class="jumbotron">
+      <h2>Readers Data</h2>
+      <button href="" style="float:right">Add a reader</button>
+      <p>The following is the table with all the readers data</b>
+      </p>
+      <table width='80%' border=0>
+ 
+        <tr style='text-align:left; background-color:lightseagreen'>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>&emsp;Birthday</th>
+        </tr>
+        <% let i=0%>
+        <% data.forEach(function(){ %>
+            <tr>
+                <td><%= data[i].Id %></td>
+                <td><%= data[i].Name %></td>
+                <td><%= data[i].Surname %></td>
+                <td><%= data[i].Birthday %></td>
+                <td>                          
+                    <form action="/deleteReader" method="post">
+                        <input type="hidden" id="id" name="id" value="1"><br><br>
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            <% i++%>
+        <% }) %>
+        
+    </table>
+    </div>
+  </main>
+</body>
+
+</html>
