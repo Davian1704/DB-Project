@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<%- include('../partials/head'); %>
+<body class="noimage">
+    <div class="login">
+        <form action="/insertBook" method="post">
+            <label for="id">Id:</label><br>
+            <input type="number" id="id" name="id" readonly value=<%= index %>><br>
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title"><br>
+            <label for="author_id">Author Id</label><br>
+            <input type="number" id="author_id" name="author_id"><br>
+            <label for="year">Year</label><br>
+            <input type="date" id="year" name="year"><br><br>
+            <input type="submit" value="Add">
+         </form> 
+</div>
+</body>
+    
+

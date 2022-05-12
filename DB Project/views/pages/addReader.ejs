@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<%- include('../partials/head'); %>
+<body class="noimage">
+    <div class="login">
+        <form action="/insertReader" method="post">
+            <label for="Id">Id:</label><br>
+            <input type="number" id="id" name="id" readonly value=<%= index %>><br>
+            <label for="name">Name</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="surname">Surname</label><br>
+            <input type="text" id="surname" name="surname"><br>
+            <label for="birthday">Birthday</label><br>
+            <input type="date" id="birthday" name="birthday"><br><br>
+            <input type="submit" value="Add">
+         </form> 
+</div>
+</body>
+    
+

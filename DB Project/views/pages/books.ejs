@@ -9,29 +9,29 @@
 <body class="container">
   <main>
     <div class="jumbotron">
-      <h2>Readers Data</h2>
-      <form action="/addReader" method="get" style="float:inline-end" target="addReader">
-        <input type="submit" value="Add a reader" >
+      <h2>Books Data</h2>
+      <form action="/addBook" method="get" style="float:inline-end" target="addBook">
+        <input type="submit" value="Add a book" >
       </form>
-      <p>The following is the table with all the readers data</b>
+      <p>The following is the table with all the books data</b>
       </p>
       <table width='80%' border=0>
  
         <tr style='text-align:left; background-color:maroon'>
             <th>ID</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>&emsp;Birthday</th>
+            <th>Title</th>
+            <th>Author Id</th>
+            <th>&emsp;Year</th>
         </tr>
         <% let i=0%>
         <% data.forEach(function(){ %>
             <tr>
                 <td><%= data[i].Id %></td>
-                <td><%= data[i].Name %></td>
-                <td><%= data[i].Surname %></td>
-                <td><%= data[i].Birthday %></td>
+                <td><%= data[i].Title %></td>
+                <td><%= data[i].Author_Id %></td>
+                <td><%= data[i].Year %></td>
                 <td>                          
-                    <form action="/deleteReader" method="post">
+                    <form action="/deleteBook" method="post">
                       <input type="submit" style="float:inline-end" value="Delete">  
                       <input type="hidden" style="float:right" id="id" name="id" value=<%= data[i].Id %>>
                     </form>
@@ -41,7 +41,7 @@
         <% }) %>
         
     </table>
-    <iframe name="addReader"></iframe>
+    <iframe name="addBook"></iframe>
     </div>
   </main>
 </body>

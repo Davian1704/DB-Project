@@ -72,29 +72,170 @@ app.get('/readers', function(req, res) {
 //delete reader
 app.post('/deleteReader', function(request,response){
 	let index=request.body.id;
-	console.log(index);
 	connection.query('Delete from readers WHERE Id= ?', [index], function (error, rows, fields) {
-		res.redirect('/readers');
+		response.redirect('/readers');
 
 	});
 });
+
+//add reader "page"
+app.get('/addReader', function(req, res) {
+	connection.query('Select Id from readers',function(error,result, fields){
+		let max_index=result[result.length-1];
+		res.render('pages/addReader',{
+			index:max_index.Id+1
+		});
+	});
+});
+
+//insert the provided reader
+app.post('/insertReader',function(request,response){
+	let id=request.body.id;
+	let name=request.body.name;
+	let surname=request.body.surname;
+	let birthday=request.body.birthday;
+	if(id && name && surname && birthday){
+		connection.query('INSERT INTO readers (Id, Name, Surname, Birthday) VALUES (?,?,?,?)',[id,name,surname,birthday], function(error, result,fields){
+			response.redirect('/addReader');
+		});
+		connection.end;
+	}
+	else
+	{
+		response.send('Please make sure to fill all fields');
+		response.end();
+	}
+
+});
+
+//authors table
+app.get('/authors', function(req, res) {
+	/* GET all safe foods */
+	connection.query('SELECT * from authors', function (error, rows, fields) {
+		if (error) {
+			throw error;
+		} else {
+			res.render('pages/authors', {
+				title: 'Authors Data Table',
+				data: rows
+			})
+		}
+	});
+  });
+
+
+
+//delete author
+app.post('/deleteAuthor', function(request,response){
+	let index=request.body.id;
+	connection.query('Delete from authors WHERE Id= ?', [index], function (error, rows, fields) {
+		response.redirect('/authors');
+
+	});
+});
+
+//add author"page"
+app.get('/addAuthor', function(req, res) {
+	connection.query('Select Id from authors',function(error,result, fields){
+		let max_index=result[result.length-1];
+		res.render('pages/addAuthor',{
+			index:max_index.Id+1
+		});
+	});
+});
+
+//insert the provided author
+app.post('/insertAuthor',function(request,response){
+	let id=request.body.id;
+	let name=request.body.name;
+	let surname=request.body.surname;
+	let birthday=request.body.birthday;
+	if(id && name && surname && birthday){
+		connection.query('INSERT INTO authors (Id, Name, Surname, Birthday) VALUES (?,?,?,?)',[id,name,surname,birthday], function(error, result,fields){
+			response.redirect('/addAuthor');
+		});
+		connection.end;
+	}
+	else
+	{
+		response.send('Please make sure to fill all fields');
+		response.end();
+	}
+
+});
+
+//books table
+app.get('/books', function(req, res) {
+	/* GET all safe foods */
+	connection.query('SELECT * from books', function (error, rows, fields) {
+		if (error) {
+			throw error;
+		} else {
+			res.render('pages/books', {
+				title: 'Books Data Table',
+				data: rows
+			})
+		}
+	});
+  });
+
+//delete book
+app.post('/deleteBook', function(request,response){
+	let index=request.body.id;
+	connection.query('Delete from books WHERE Id= ?', [index], function (error, rows, fields) {
+		response.redirect('/books');
+
+	});
+});
+
+//add book "page"
+app.get('/addBook', function(req, res) {
+	connection.query('Select Id from books',function(error,result, fields){
+			if(result.length>0){
+				let max_index=result[result.length-1];
+		
+			res.render('pages/addBook',{
+				index:max_index.Id+1
+			});
+			}
+			else{
+				res.render('pages/addBook',{
+					index:1
+				});
+			}
+	});
+});
+
+//insert the provided author
+app.post('/insertBook',function(request,response){
+	let id=request.body.id;
+	let title=request.body.title;
+	let author_id=request.body.author_id;
+	let year=request.body.year;
+	if(id && title && author_id && year){
+		connection.query('INSERT INTO books (Id, Title, Author_Id, Year) VALUES (?,?,?,?)',[id,title,author_id,year], function(error, result,fields){
+			response.redirect('/addBook');
+		});
+		connection.end;
+	}
+	else
+	{
+		response.send('Please make sure to fill all fields');
+		response.end();
+	}
+
+});
+
 //login system
 app.post('/auth', function(request, response) {
-	// Capture the input fields
 	let username = request.body.user;
 	let password = request.body.password;
-	// Ensure the input fields exists and are not empty
 	if (username && password) {
-		// Execute SQL query that'll select the account from the database based on the specified username and password
 		authconnection.query('SELECT * FROM login WHERE UserName = ? AND Password = ?', [username, password], function(error, results, fields) {
-			// If there is an issue with the query, output the error
 			if (error) throw error;
-			// If the account exists
 			if (results.length > 0) {
-				// Authenticate the user
 				request.session.loggedin = true;
 				request.session.username = username;
-				// Redirect to home page
 				response.redirect('/home');
 			} else {
 				response.redirect('/relogin');
