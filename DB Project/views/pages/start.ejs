@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="background">
+<head>
+  <%- include('../partials/head'); %>
+
+  <style>
+      * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.startpage{
+    height: 720px;
+    width: 1280px;
+}
+
+.box {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    height: 100%;    
+}
+
+
+.box:first-child {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+.box:nth-child(2) {
+    border-bottom: 1px solid black;
+}
+.box:nth-child(3) {
+    border-right: 1px solid black;
+}
+
+</style>
+</head>
+<body class="container">
+<main>
+    
+<div class="startpage">
+        <div class="box">
+            <h1>Box 1</h1>
+            <form action="/login" method="get">
+                <input type="submit" style="float:right" value="Login">  
+              </form>
+        </div>
+        
+        <div class="box" style="background-image:url(../images/librarians.jpg) ;">
+        </div>
+        
+</div>
+    
+</main>
+
+</body>
+</div>
+</html>

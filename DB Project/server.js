@@ -42,8 +42,13 @@ app.get('/home', function(req, res) {
   res.render('pages/index');
 });
 
-// login page
+//front page
 app.get('/', function(req, res) {
+	res.render('pages/start');
+  });
+
+// login page
+app.get('/login', function(req, res) {
   res.render('pages/login');
 });
 
