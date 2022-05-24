@@ -13,7 +13,6 @@
 
 .startpage{
     height: 720px;
-    width: 1280px;
 }
 
 .box {
@@ -35,6 +34,14 @@
     border-right: 1px solid black;
 }
 
+h1{
+    color:mediumblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h2,h3{
+    color: darkorange;
+}
 </style>
 </head>
 <body class="container">
@@ -42,13 +49,15 @@
     
 <div class="startpage">
         <div class="box">
-            <h1>Box 1</h1>
+            <h1>Welcome to the library page for librarians</h1>
+            <h2>This is a specially designed webpage for managing a database with the readers, authors and books</h2>
+            <h3>Please input your credentials if you are a librarian on the following login link:</h3>
             <form action="/login" method="get">
-                <input type="submit" style="float:right" value="Login">  
+                <input type="submit" style="float:inline-end" value="Login">  
               </form>
         </div>
         
-        <div class="box" style="background-image:url(../images/librarians.jpg) ;">
+        <div class="box" style="background-image:url(../images/librarians.jpg);">
         </div>
         
 </div>
