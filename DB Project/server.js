@@ -236,7 +236,7 @@ app.post('/auth', function(request, response) {
 	let username = request.body.user;
 	let password = request.body.password;
 	if (username && password) {
-		authconnection.query('SELECT * FROM login WHERE UserName = ? AND Password = ?', [username, password], function(error, results, fields) {
+		authconnection.query('SELECT * FROM credentials WHERE user = ? AND password = ?', [username, password], function(error, results, fields) {
 			if (error) throw error;
 			if (results.length > 0) {
 				request.session.loggedin = true;
